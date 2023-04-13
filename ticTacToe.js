@@ -30,6 +30,7 @@ cellElements.forEach(cell => {
     cell.removeEventListener('click', handleClick);
     cell.addEventListener('click', handleClick, {once: true})
 });
+
 setBoardHoverClass()
 winningMessage.classList.remove('show')
 }
@@ -37,6 +38,7 @@ winningMessage.classList.remove('show')
 
 function handleClick(e) {
 const cell = e.target;
+// if it's O's turn, currentClass = circleClass, otherwise, xClass
 const currentClass = circleTurn ? circleClass : xClass;
 placeMark(cell, currentClass);
 
@@ -52,15 +54,55 @@ if(checkWin(currentClass)) {
 }
 }
 
-function endGame(draw) {
-    if(draw){
-        winningMessageText.innerText = 'Draw!'
-    } else {
-        winningMessageText.innerHTML = `${circleTurn ? "O's": "X's"} Win!`
-    }
-        winningMessage.classList.add('show');
-}
+// function endGame(draw) {
+//     if(draw){
+//         winningMessageText.innerText = 'Draw!'
+//     } else {
+//         winningMessageText.innerHTML = `${circleTurn ? "O's": "X's"} Win!`
+//     }
+//         winningMessage.classList.add('show');
+// }
 
+// function endGame(draw) {
+//     if (draw) {
+//         winningMessageText.innerText = 'Draw!';
+//     } else {
+//         winningMessageText.innerHTML = `${circleTurn ? "O's" : "X's"} Win!`;
+//         // Update scoreboard
+//         const playerXScore = document.getElementById('player-x-score');
+//         const playerOScore = document.getElementById('player-o-score');
+//         if (circleTurn) {
+//             playerOScore.textContent = `Player O: ${parseInt(playerOScore.textContent.split(': ')[1]) + 1}`;
+//         } else {
+//             playerXScore.textContent = `Player X: ${parseInt(playerXScore.textContent.split(': ')[1]) + 1}`;
+//         }
+//     }
+//     winningMessage.classList.add('show');
+// }
+
+
+let playerXScore = 0;
+let playerOScore = 0;
+
+function endGame(draw) {
+    if (draw) {
+        winningMessageText.innerText = 'Draw!';
+    } else {
+        winningMessageText.innerHTML = `${circleTurn ? "O's" : "X's"} Win!`;
+
+    //update scoreboard
+        if (circleTurn) {
+            playerOScore++;
+        } else {
+            playerXScore++;
+        }
+    }
+    // Update scoreboard text
+    document.getElementById('player-x-score').textContent = `Player X: ${playerXScore}`;
+    document.getElementById('player-o-score').textContent = `Player O: ${playerOScore}`;
+    winningMessage.classList.add('show');
+}
+//checks if every cell contains X's or O's without a winner
 function isDraw() {
    return [...cellElements].every(cell => { 
     return cell.classList.contains(xClass) || 
@@ -73,10 +115,12 @@ function placeMark(cell, currentClass) {
  cell.classList.add(currentClass);   
 }
 
+
 function swapTurns() {
     circleTurn = !circleTurn;
 }
 
+//changes the X or O hover based on whose turn it is
 function setBoardHoverClass() {
     board.classList.remove(xClass);
     board.classList.remove(circleClass);
@@ -88,6 +132,7 @@ function setBoardHoverClass() {
 
 }
 
+// checks if any of the cell combinations are met with one single class(X's or O's)
 function checkWin(currentClass) {
     return winCombos.some(combination => {
         return combination.every(index => {
