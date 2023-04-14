@@ -21,12 +21,14 @@ h1 {
 }
 
 .container {
+    font-family: "Space Mono", monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .scoreboard {
+    font-family: "Space Mono", monospace;
     display: flex;
     gap: 1rem;
     margin-top: .5rem;
