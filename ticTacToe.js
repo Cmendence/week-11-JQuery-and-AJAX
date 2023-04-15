@@ -23,6 +23,8 @@ startGame()
 restartButton.addEventListener('click', startGame);
 
 function startGame(){
+    document.getElementById('player-turn').textContent = `X Goes First`;
+
     circleTurn = false;
 cellElements.forEach(cell => {
     cell.classList.remove(xClass);
@@ -51,34 +53,9 @@ if(checkWin(currentClass)) {
     //check for draw
     swapTurns();
     setBoardHoverClass();
+    document.getElementById('player-turn').textContent = circleTurn ? `O's Turn` : `X's Turn`;
 }
 }
-
-// function endGame(draw) {
-//     if(draw){
-//         winningMessageText.innerText = 'Draw!'
-//     } else {
-//         winningMessageText.innerHTML = `${circleTurn ? "O's": "X's"} Win!`
-//     }
-//         winningMessage.classList.add('show');
-// }
-
-// function endGame(draw) {
-//     if (draw) {
-//         winningMessageText.innerText = 'Draw!';
-//     } else {
-//         winningMessageText.innerHTML = `${circleTurn ? "O's" : "X's"} Win!`;
-//         // Update scoreboard
-//         const playerXScore = document.getElementById('player-x-score');
-//         const playerOScore = document.getElementById('player-o-score');
-//         if (circleTurn) {
-//             playerOScore.textContent = `Player O: ${parseInt(playerOScore.textContent.split(': ')[1]) + 1}`;
-//         } else {
-//             playerXScore.textContent = `Player X: ${parseInt(playerXScore.textContent.split(': ')[1]) + 1}`;
-//         }
-//     }
-//     winningMessage.classList.add('show');
-// }
 
 
 let playerXScore = 0;

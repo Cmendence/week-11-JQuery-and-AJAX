@@ -1,5 +1,6 @@
 *, *::after, *::before {
     box-sizing: border-box;
+    font-family: "Space Mono", monospace;
 }
 
 :root {
@@ -16,18 +17,24 @@ body {
 
 h1 {
     justify-content: center;
-    font-size: 40px;
+    font-size: 4rem;
 }
 
 .container {
-    font-family: "Space Mono", monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+}
+
+.turn {
+    margin-top: 4rem;
+    font-weight: bold;
 }
 
 .scoreboard {
-    font-family: "Space Mono", monospace;
     display: flex;
     gap: 1rem;
     margin-top: .5rem;
@@ -43,7 +50,7 @@ h1 {
     align-items: center;
     align-content: center;
     grid-template-columns: repeat(3, auto);
-    margin-top: -4rem;
+    margin-top: -7rem;
 }
 
 .cell {
